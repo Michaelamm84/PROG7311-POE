@@ -164,6 +164,10 @@ namespace PROG_WEB_APP.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Fullname")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("INTEGER");
 
@@ -195,10 +199,6 @@ namespace PROG_WEB_APP.Migrations
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("fullname")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

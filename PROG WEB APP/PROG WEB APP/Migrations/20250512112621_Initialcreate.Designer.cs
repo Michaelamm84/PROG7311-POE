@@ -11,8 +11,8 @@ using PROG_WEB_APP.DATA;
 namespace PROG_WEB_APP.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250511184445_attempt")]
-    partial class attempt
+    [Migration("20250512112621_Initialcreate")]
+    partial class Initialcreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -167,6 +167,10 @@ namespace PROG_WEB_APP.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Fullname")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("INTEGER");
 
@@ -198,10 +202,6 @@ namespace PROG_WEB_APP.Migrations
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("fullname")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

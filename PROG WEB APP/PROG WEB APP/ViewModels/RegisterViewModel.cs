@@ -9,7 +9,7 @@ namespace PROG_WEB_APP.ViewModels
         public class RegisterViewModel
         {
             [Required(ErrorMessage = "Name is required.")]
-            public string Name { get; set; }
+            public string FullName { get; set; }
 
             [Required(ErrorMessage = "Email is required.")]
             public string Email { get; set; }

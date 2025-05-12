@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PROG_WEB_APP.Models;
 using System.Diagnostics;
@@ -18,6 +19,15 @@ namespace PROG_WEB_APP.Controllers
             return View();
         }
 
+
+        [Authorize]
+        public IActionResult FarmManager() {
+        
+            return View();
+        }
+
+
+        [Authorize]
         public IActionResult Privacy()
         {
             return View();

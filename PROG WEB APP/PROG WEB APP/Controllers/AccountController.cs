@@ -24,6 +24,27 @@ namespace PROG_WEB_APP.Controllers
             return View();
         }
 
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Email or password is incorrect.");
+                    return View(model);
+                }
+            }
+            return View(model);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
@@ -34,7 +55,7 @@ namespace PROG_WEB_APP.Controllers
                 Console.Write("does it get here ");
                 Employee employee = new Employee
                 {
-                    //fullname = model.Name,
+                    Fullname = model.FullName,
                     Email = model.Email,
                     UserName = model.Email,
 
@@ -63,7 +84,14 @@ namespace PROG_WEB_APP.Controllers
             return View(model);
         }
 
-            public IActionResult Register()
+
+        public async Task<IActionResult> Logout()
+        {
+            await signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult Register()
             {
                 return View();
             }
