@@ -1,1 +1,44 @@
-﻿
+﻿@model PROG_WEB_APP.ViewModels.FarmerViewModel
+
+@{
+    ViewData["Title"] = "Add Farmer";
+}
+
+<h1>Add New Farmer</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group mb-3">
+                <label asp-for="FName" class="control-label"></label>
+                <input asp-for="FName" class="form-control" />
+                <span asp-validation-for="FName" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="FAddress" class="control-label"></label>
+                <input asp-for="FAddress" class="form-control" />
+                <span asp-validation-for="FAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="FEmail" class="control-label"></label>
+                <input asp-for="FEmail" class="form-control" type="email" />
+                <span asp-validation-for="FEmail" class="text-danger"></span>
+            </div>
+           
+            <div class="form-group mb-3">
+                <label asp-for="FPassword" class="control-label"></label>
+                <input asp-for="FPassword" class="form-control" type="password" />
+                <span asp-validation-for="FPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Add Farmer</button>
+                <a asp-action="Index" asp-controller="Home" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

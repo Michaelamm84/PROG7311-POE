@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using PROG_WEB_APP.Models;
 using PROG_WEB_APP.ViewModels;
@@ -58,6 +59,7 @@ namespace PROG_WEB_APP.Controllers
                     Fullname = model.FullName,
                     Email = model.Email,
                     UserName = model.Email,
+                    
 
                 };
 
@@ -90,6 +92,11 @@ namespace PROG_WEB_APP.Controllers
             await signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
+
+
+
+
+       
 
         public IActionResult Register()
             {

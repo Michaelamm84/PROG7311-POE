@@ -1,8 +1,45 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@using Microsoft.EntityFrameworkCore.Metadata.Internal
+@using PROG_WEB_APP.DATA;
+@using PROG_WEB_APP.Models;
+@using static Microsoft.EntityFrameworkCore.DbLoggerCategory
+@using PROG_WEB_APP.Controllers;
+
+@model List<PROG_WEB_APP.Models.Farmer>
+
+@{
+    ViewData["Title"] = "All Farmers";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+
+
+<h2>All Farmers</h2>
+
+@if (Model != null)
+{
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var Farmers in Model)
+            {
+                <tr>
+                    <td>@Farmers.FName</td>
+                    <td>@Farmers.FAddress</td>
+                    <td>@Farmers.FEmail</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+    {
+        <div class="alert alert-warning">No farmers found in the database.</div>
+    }
+    
+

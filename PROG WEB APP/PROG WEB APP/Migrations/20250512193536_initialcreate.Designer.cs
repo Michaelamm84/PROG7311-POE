@@ -11,8 +11,8 @@ using PROG_WEB_APP.DATA;
 namespace PROG_WEB_APP.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250512112621_Initialcreate")]
-    partial class Initialcreate
+    [Migration("20250512193536_initialcreate")]
+    partial class initialcreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -231,6 +231,10 @@ namespace PROG_WEB_APP.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("FName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FPassword")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
