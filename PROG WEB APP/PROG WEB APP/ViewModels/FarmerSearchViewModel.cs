@@ -11,5 +11,9 @@ namespace PROG_WEB_APP.ViewModels
         public List<Product> Products { get; set; } = new List<Product>();
         public List<Farmer> farmers { get; set; } = new List<Farmer>();
 
+        
+        [DataType(DataType.Date)]
+        public DateTime Date { get; set; }
+
     }
 }

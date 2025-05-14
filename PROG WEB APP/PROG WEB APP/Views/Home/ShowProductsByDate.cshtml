@@ -1,0 +1,14 @@
+﻿@model PROG_WEB_APP.Models.Product
+
+
+<h2>Search Products by Date</h2>
+
+<form asp-action="SearchByProductDate" method="post">
+    <div class="form-group mt-3">
+        <label asp-for="Date">Product Date</label>
+        <input asp-for="Date" class="form-control" type="date" required />
+        <span asp-validation-for="Date" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">Search by Date</button>
+</form>

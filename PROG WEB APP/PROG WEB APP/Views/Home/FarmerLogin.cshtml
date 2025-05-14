@@ -8,12 +8,12 @@
 
 <form asp-action="LoginFarmer" method="post">
     <div class="form-group">
-        <label asp-for="FName">FName</label>
+        <label>First Name</label>
         <input asp-for="FName" class="form-control" />
         <span asp-validation-for="FName" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="FPassword">FPassword</label>
+        <label>Password</label>
         <input asp-for="FPassword" class="form-control" type="password" />
         <span asp-validation-for="FPassword" class="text-danger"></span>
     </div>

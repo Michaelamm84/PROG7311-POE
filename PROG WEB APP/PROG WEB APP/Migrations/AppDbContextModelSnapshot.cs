@@ -246,6 +246,9 @@ namespace PROG_WEB_APP.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("FarmerId")
                         .HasColumnType("INTEGER");
 

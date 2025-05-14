@@ -13,6 +13,12 @@ namespace PROG_WEB_APP.ViewModels
         public decimal Price { get; set; }
         public int Quantity { get; set; }
         public int FarmerId { get; set; }
+
+        [Required]
+        [DataType(DataType.Date)]
+        public DateTime Date { get; set; }
+
+
         //public List<Farmer> Farmers { get; set; }
 
     }

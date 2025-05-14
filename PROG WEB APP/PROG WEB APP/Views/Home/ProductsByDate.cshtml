@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<PROG_WEB_APP.Models.Product>
 
-<h2>Farmer's Products</h2>
+<h2>Products By Date</h2>
 
 @if (!Model.Any())
 {
-    <p>No products found for this farmer.</p>
+    <p>No products found for this date.</p>
 }
 else
 {
@@ -15,6 +15,7 @@ else
                 <th>Price</th>
                 <th>Quantity</th>
                 <th>Date</th>
+                <th>Farmer Name</th>
             </tr>
         </thead>
         <tbody>
@@ -25,6 +26,7 @@ else
                     <td>@product.Price</td>
                     <td>@product.Quantity</td>
                     <td>@product.Date.ToShortDateString()</td>
+                    <td>@product.Farmer?.FName</td>
                 </tr>
             }
         </tbody>

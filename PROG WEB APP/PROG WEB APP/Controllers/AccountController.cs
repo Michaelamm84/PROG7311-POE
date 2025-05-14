@@ -24,11 +24,15 @@ namespace PROG_WEB_APP.Controllers
         {
             return View();
         }
+        //--------------------------------------------------------------------------------------
+        //--------------------------------------------------------------------------------------
 
 
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
+
+            
             if (ModelState.IsValid)
             {
                 var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
@@ -45,6 +49,8 @@ namespace PROG_WEB_APP.Controllers
             }
             return View(model);
         }
+        //--------------------------------------------------------------------------------------
+        //--------------------------------------------------------------------------------------
 
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
@@ -85,7 +91,8 @@ namespace PROG_WEB_APP.Controllers
             }
             return View(model);
         }
-
+        //--------------------------------------------------------------------------------------
+        //--------------------------------------------------------------------------------------
 
         public async Task<IActionResult> Logout()
         {
@@ -96,8 +103,8 @@ namespace PROG_WEB_APP.Controllers
 
 
 
-       
-
+        //--------------------------------------------------------------------------------------
+        //--------------------------------------------------------------------------------------
         public IActionResult Register()
             {
                 return View();

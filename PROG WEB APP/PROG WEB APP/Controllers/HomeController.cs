@@ -26,13 +26,18 @@ namespace PROG_WEB_APP.Controllers
         {
             return View();
         }
+        //---------------------------------------------------------------------
+
 
 
         [Authorize]
-        public IActionResult FarmManager() {
+        public IActionResult FarmManager()
+        {
 
             return View();
         }
+        //---------------------------------------------------------------------
+        //---------------------------------------------------------------------
 
         // POST: Farmers/Create
         [HttpPost]
@@ -57,13 +62,15 @@ namespace PROG_WEB_APP.Controllers
 
             return View(model);
         }
+        //---------------------------------------------------------------------
+        //---------------------------------------------------------------------
 
         [Authorize]
         public async Task<IActionResult> ShowAllFarmer()
         {
             if (_context.Farmers == null)
             {
-                throw new Exception("Farmers table is null. Check your database configuration.");
+                throw new Exception("Please sign in first or enter the correct details.");
             }
 
             var farmers = await _context.Farmers.ToListAsync();
@@ -71,30 +78,26 @@ namespace PROG_WEB_APP.Controllers
 
         }
 
-        // public ActionResult ShowAllProducts()
-        // {
-        // Retrieve all products from the database
-        // var products = await _context.Products.ToListAsync();
-
-        // Pass the list of products to the view
-        //return View(products);
-        //  }
+        //---------------------------------------------------------------------
+        //---------------------------------------------------------------------
 
 
-        [Authorize]
+
         public IActionResult FarmerLogin()
         {
 
             return View();
         }
 
+        //---------------------------------------------------------------------
+        //---------------------------------------------------------------------
 
 
-        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> LoginFarmer(FarmerSignIn model)
         {
+            Console.WriteLine("login farmer");
             if (ModelState.IsValid)
             {
                 var farmer = await _context.Farmers
@@ -116,30 +119,7 @@ namespace PROG_WEB_APP.Controllers
             System.Diagnostics.Debug.WriteLine(string.Join("; ", errors));
 
             return View("Register");
-            /*            if (ModelState.IsValid)
-                        {
-                            // Check if a farmer exists with the entered name and password
-                            var farmer = await _context.Farmers
-                                .FirstOrDefaultAsync(f => f.FName == model.FName && f.FPassword == model.FPassword);
-
-                            if (farmer == null)
-                            {
-                                ModelState.AddModelError(string.Empty, "Invalid farmer name or password.");
-                                return View("Index");
-                            }
-
-                            // If the farmer is found, store their ID and redirect to the products management page
-                            TempData["FarmerId"] = farmer.Id;
-                            return RedirectToAction("ViewProduct"); // The product management page
-                        }
-
-                        var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage);
-                        // Log errors (e.g., to console or debug output)
-                        System.Diagnostics.Debug.WriteLine(string.Join("; ", errors));
-
-
-                        // If model state is invalid, return the view with errors
-                        return View("Register");*/
+          
         }
 
 
@@ -149,8 +129,10 @@ namespace PROG_WEB_APP.Controllers
 
             return View();
         }
+
         //-----------------------------------------------------------------------------------------
         //-----------------------------------------------------------------------------------------
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddProduct(ProductViewModel model)
@@ -169,7 +151,8 @@ namespace PROG_WEB_APP.Controllers
                     PName = model.PName,
                     Price = model.Price,
                     Quantity = model.Quantity,
-                    FarmerId = farmerId.Value
+                    FarmerId = farmerId.Value,
+                    Date = model.Date
                 };
 
                 _context.Products.Add(product);
@@ -180,64 +163,11 @@ namespace PROG_WEB_APP.Controllers
 
             return View(model);
         }
-        /*var farmerIdTemp = TempData.Peek("FarmerId");*/
-        // !int.TryParse(TempData["FarmerId"].ToString(), out int farmerId);
-        /*if (ModelState.IsValid)
-        {
-            // Attempt to retrieve FarmerId from TempData
-            if (TempData["FarmerId"] is int farmerId)
-            {
-                var product = new Product
-                {
-                    PName = model.PName,
-                    Price = model.Price,
-                    Quantity = model.Quantity,
-                    FarmerId = farmerId
-                };
-
-                _context.Products.Add(product);
-                await _context.SaveChangesAsync();
-
-                // Optionally, retain FarmerId in TempData for subsequent requests
-                TempData.Keep("FarmerId");
-
-                return RedirectToAction("ViewProduct");
-            }
-            else
-            {
-                // Handle the case where FarmerId is not available
-                ModelState.AddModelError(string.Empty, "Farmer ID is missing. Please log in again.");
-            }
-        }
-
-        return View("Index", model);*/
-
-        /* if (ModelState.IsValid)
-         {
-             int? num = 7;
-             var product = new Product
-             {
-
-
-                 PName = model.PName,
-                 Price = model.Price,
-                 Quantity = model.Quantity,
-                 FarmerId = model.FarmerId
-             };
-
-             _context.Products.Add(product);
-             await _context.SaveChangesAsync();
-
-             return RedirectToAction("ViewProduct");
-         }*/
-
-        /*  return View("Index", model);*/
-    
 
         //-----------------------------------------------------------------------------------------
         //-----------------------------------------------------------------------------------------
 
-        [Authorize]
+
         public IActionResult PromptProduct()
         {
             return View("AddProduct");
@@ -250,9 +180,10 @@ namespace PROG_WEB_APP.Controllers
 
 
         [Authorize]
-        public IActionResult ShowProducts() {
-        
-        return View();
+        public IActionResult ShowProducts()
+        {
+
+            return View();
         }
 
         //-----------------------------------------------------------------------------------------
@@ -284,12 +215,33 @@ namespace PROG_WEB_APP.Controllers
         //-----------------------------------------------------------------------------------------
         //----------------------------------------------------------------------------------------
 
-        /* [HttpGet]
-         public IActionResult Search()
-         {
-             return View(new FarmerSearchViewModel());
-         }*/
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SearchByProductDate(FarmerSearchViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                var products = await _context.Products
+                 .Include(p => p.Farmer)
+                 .Where(p => p.Date.Date == model.Date.Date) // Direct Date comparison
+                 .ToListAsync();
+
+                if (!products.Any())
+                {
+                    ModelState.AddModelError(string.Empty, $"No products found for the specified date.");
+                    return View("ProductsByDate", products);
+                }
+
+                return View("ProductsByDate", products);
+            }
+            return View("ProductsByDate");
+            // Direct date comparison without HasValue
+
+        }
+
+
+        //---------------------------------------------------------------------
         //---------------------------------------------------------------------
 
         [Authorize]
@@ -303,5 +255,16 @@ namespace PROG_WEB_APP.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+
+        //-------------------------------------------------------------------------
+        //---------------------------------------------------------------------
+        [Authorize]
+        public IActionResult ShowProductsByDate()
+        {
+
+            return View();
+        }
     }
 }
+

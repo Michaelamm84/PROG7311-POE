@@ -11,8 +11,8 @@ using PROG_WEB_APP.DATA;
 namespace PROG_WEB_APP.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250512193536_initialcreate")]
-    partial class initialcreate
+    [Migration("20250514162517_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -248,6 +248,9 @@ namespace PROG_WEB_APP.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("FarmerId")
                         .HasColumnType("INTEGER");

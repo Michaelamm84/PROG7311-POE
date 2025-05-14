@@ -16,7 +16,8 @@ namespace PROG_WEB_APP.Models
         public int FarmerId { get; set; }
         public Farmer Farmer { get; set; }
 
-       /* [Required ]
-        public DateTime Date { get; set; }*/
+        [Required]
+        [DataType(DataType.Date)]
+        public DateTime Date { get; set; }
     }
 }
