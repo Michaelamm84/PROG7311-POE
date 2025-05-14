@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Runtime.CompilerServices;
 
 
 namespace PROG_WEB_APP.Models
@@ -14,5 +15,8 @@ namespace PROG_WEB_APP.Models
         public int Quantity { get; set; }
         public int FarmerId { get; set; }
         public Farmer Farmer { get; set; }
+
+       /* [Required ]
+        public DateTime Date { get; set; }*/
     }
 }

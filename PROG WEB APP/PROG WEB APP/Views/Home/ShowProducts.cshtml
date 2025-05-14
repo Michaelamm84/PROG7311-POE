@@ -1,0 +1,29 @@
+﻿@using Microsoft.EntityFrameworkCore.Metadata.Internal
+@using PROG_WEB_APP.DATA;
+@using PROG_WEB_APP.Models;
+@using static Microsoft.EntityFrameworkCore.DbLoggerCategory
+@using PROG_WEB_APP.Controllers;
+
+
+
+@{
+    ViewData["Title"] = "All Products";
+}
+
+
+@model PROG_WEB_APP.ViewModels.FarmerSearchViewModel
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="Search" method="post">
+    <div class="form-group">
+        <label asp-for="FName"></label>
+        <input asp-for="FName" class="form-control" />
+        <span asp-validation-for="FName" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -38,7 +38,14 @@ namespace PROG_WEB_APP
                 options.SignIn.RequireConfirmedPhoneNumber = false;
             })
 .AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
-            
+
+            //checking farmer login
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
 
 
             // Add services to the container.
@@ -46,7 +53,9 @@ namespace PROG_WEB_APP
 
             var app = builder.Build();
 
-
+            // chewcking farmer login function 
+            
+            
            
 
 
@@ -58,6 +67,7 @@ namespace PROG_WEB_APP
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseSession();
 
             app.UseAuthorization();
 

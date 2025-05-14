@@ -13,7 +13,10 @@ namespace PROG_WEB_APP.ViewModels
         public decimal Price { get; set; }
         public int Quantity { get; set; }
         public int FarmerId { get; set; }
-        
+        //public List<Farmer> Farmers { get; set; }
+
     }
+
+    
 }
 

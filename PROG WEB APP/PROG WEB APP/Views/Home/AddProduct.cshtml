@@ -1,4 +1,4 @@
-﻿@model PROG_WEB_APP.Models.Product
+﻿@model PROG_WEB_APP.ViewModels.ProductViewModel
 
 <div class="account-box">
     <h2>Add New Product</h2>
@@ -19,11 +19,11 @@
             <input asp-for="Quantity" class="form-control" type="number" />
             <span asp-validation-for="Quantity" class="text-danger"></span>
         </div>
-        <div class="mb-3">
+        @* <div class="mb-3">
             <label asp-for="FarmerId" class="form-label"></label>
             <input asp-for="FarmerId" class="form-control" type="number" />
             <span asp-validation-for="FarmerId" class="text-danger"></span>
-        </div>
+        </div> *@
         <div>
             <button type="submit" class="btn btn-primary">Save Product</button>
             <a asp-action="AddProduct" asp-controller="Home" class="btn btn-secondary">Cancel</a>

@@ -20,7 +20,8 @@ namespace PROG_WEB_APP.Models
             public string FEmail { get; set; }
 
             public List<Product> Products { get; set; } = new List<Product>();
-        }
+        
+    }
    }
 
 
