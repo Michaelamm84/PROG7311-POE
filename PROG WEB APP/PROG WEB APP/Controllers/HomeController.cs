@@ -145,7 +145,7 @@ namespace PROG_WEB_APP.Controllers
                 if (farmerId == null)
                 {
                     // Farmer not logged in; redirect to login page
-                    return RedirectToAction("Login", "Farmer");
+                    return View("ErrorProduct");
                 }
 
                 var product = new Product
